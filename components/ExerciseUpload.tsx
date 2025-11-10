@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { Upload, X, Loader2 } from 'lucide-react'
 import toast from 'react-hot-toast'
 import { Subject } from '@/types'
+import Image from 'next/image'
 
 interface ExerciseUploadProps {
   onSuccess: () => void
@@ -135,10 +136,11 @@ export default function ExerciseUpload({ onSuccess }: ExerciseUploadProps) {
             >
               {preview ? (
                 <div className="relative w-full h-full">
-                  <img
+                  <Image
                     src={preview}
                     alt="Preview"
-                    className="w-full h-full object-contain rounded-xl"
+                    fill
+                    className="object-contain rounded-xl"
                   />
                   <button
                     type="button"

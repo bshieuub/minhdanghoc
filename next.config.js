@@ -4,12 +4,7 @@ const nextConfig = {
   images: {
     domains: [],
     remotePatterns: [],
-    unoptimized: false,
-  },
-  api: {
-    bodyParser: {
-      sizeLimit: '10mb',
-    },
+    unoptimized: true,
   },
 }
 

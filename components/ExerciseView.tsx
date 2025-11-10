@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation'
 import toast from 'react-hot-toast'
 import { Exercise, Question } from '@/types'
 import { getPraiseMessage } from '@/utils/praises'
+import Image from 'next/image'
 
 interface ExerciseViewProps {
   exercise: Exercise
@@ -182,10 +183,11 @@ export default function ExerciseView({ exercise }: ExerciseViewProps) {
               onClick={() => handleImageClick(exercise.originalFile!)}
             >
               <div className="relative w-full h-64 md:h-96 rounded-lg overflow-hidden border-2 border-gray-200 hover:border-blue-500 transition-colors bg-gray-50">
-                <img
+                <Image
                   src={exercise.originalFile}
                   alt="Bài tập gốc"
-                  className="w-full h-full object-contain"
+                  fill
+                  className="object-contain"
                 />
                 <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-10 transition-opacity flex items-center justify-center">
                   <div className="opacity-0 group-hover:opacity-100 transition-opacity bg-white bg-opacity-90 rounded-full p-3 shadow-lg">
@@ -372,10 +374,11 @@ export default function ExerciseView({ exercise }: ExerciseViewProps) {
                 className="relative w-full h-full flex items-center justify-center"
                 onClick={(e) => e.stopPropagation()}
               >
-                <img
+                <Image
                   src={selectedImage}
                   alt="Bài tập gốc - phóng to"
-                  className="max-w-full max-h-full object-contain rounded-lg shadow-2xl"
+                  fill
+                  className="object-contain rounded-lg shadow-2xl"
                 />
               </div>
               <p className="absolute bottom-4 left-1/2 transform -translate-x-1/2 text-white text-sm bg-black bg-opacity-50 px-4 py-2 rounded-full">
