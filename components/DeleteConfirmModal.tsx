@@ -40,7 +40,7 @@ export default function DeleteConfirmModal({
             🗑️ Bạn có chắc chắn muốn xóa bài tập này không?
           </p>
           <p className="text-sm text-gray-500 font-semibold bg-gray-100 p-3 rounded-lg">
-            "{title}"
+            &quot;{title}&quot;
           </p>
           <p className="text-sm text-red-600 mt-3">
             ⚠️ Hành động này không thể hoàn tác!

@@ -3,6 +3,7 @@
 import { BookOpen, Play, Trash2, Trophy, Calendar } from 'lucide-react'
 import { Exercise, Subject } from '@/types'
 import { useRouter } from 'next/navigation'
+import Image from 'next/image'
 
 interface ExerciseListProps {
   exercises: Exercise[]
@@ -54,11 +55,12 @@ export default function ExerciseList({
           <div className="relative z-10">
             {/* Thumbnail Image */}
             {exercise.originalFile && isImageFile(exercise.originalFile) && (
-              <div className="mb-4 rounded-lg overflow-hidden border-2 border-white border-opacity-30">
-                <img
+              <div className="mb-4 rounded-lg overflow-hidden border-2 border-white border-opacity-30 relative h-32">
+                <Image
                   src={exercise.originalFile}
                   alt={exercise.title}
-                  className="w-full h-32 object-cover"
+                  fill
+                  className="object-cover"
                 />
               </div>
             )}

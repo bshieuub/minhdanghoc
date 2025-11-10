@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { v4 as uuidv4 } from 'uuid'
+import path from 'path'
 import { addExercise } from '@/lib/database'
 import { saveFile } from '@/lib/storage-memory'
 import { Exercise, Subject, Question } from '@/types'
