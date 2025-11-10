@@ -1,9 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { writeFile, mkdir } from 'fs/promises'
-import { existsSync } from 'fs'
-import path from 'path'
 import { v4 as uuidv4 } from 'uuid'
 import { addExercise } from '@/lib/database'
+import { saveFile } from '@/lib/storage-memory'
 import { Exercise, Subject, Question } from '@/types'
 import { extractTextFromImage, parseExerciseFromText } from '@/lib/ocr'
 
@@ -56,15 +54,8 @@ export async function POST(request: NextRequest) {
       questions = await parseExerciseFromText('', subject)
     }
 
-    // Save file to public/uploads
-    const uploadsDir = path.join(process.cwd(), 'public', 'uploads')
-    if (!existsSync(uploadsDir)) {
-      await mkdir(uploadsDir, { recursive: true })
-    }
-
-    const fileName = `${uuidv4()}${fileExtension}`
-    const filePath = path.join(uploadsDir, fileName)
-    await writeFile(filePath, buffer)
+    // Save file using storage module (handles both file system and in-memory)
+    const fileUrl = await saveFile(buffer, file.name, file.type)
 
     // Create exercise
     const exercise: Exercise = {
@@ -74,7 +65,7 @@ export async function POST(request: NextRequest) {
       questions,
       createdAt: new Date().toISOString(),
       completed: false,
-      originalFile: `/uploads/${fileName}`,
+      originalFile: fileUrl,
     }
 
     // Save exercise

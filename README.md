@@ -68,19 +68,37 @@ vercel --prod
 
 ### Lưu ý quan trọng cho Vercel
 
-1. **Database**: Ứng dụng hiện tại sử dụng file system để lưu trữ (hoạt động tốt trong development). Để triển khai trên Vercel, bạn nên:
-   - Sử dụng Vercel Postgres hoặc Vercel KV
-   - Hoặc sử dụng Supabase, MongoDB Atlas, hoặc database service khác
-   - Cập nhật file `lib/database.ts` để sử dụng database service
+**✅ GIẢI PHÁP TẠM THỜI ĐÃ SẴN SÀNG!**
 
-2. **File Uploads**: File uploads được lưu trong `public/uploads`. Trên Vercel:
-   - Sử dụng Vercel Blob Storage
-   - Hoặc sử dụng AWS S3, Cloudinary, hoặc service tương tự
-   - Cập nhật API route `app/api/exercises/upload/route.ts`
+Ứng dụng đã được cập nhật để **tự động hoạt động trên Vercel** mà không cần cấu hình!
 
-3. **Environment Variables**: Nếu sử dụng database service, thêm environment variables trong Vercel Dashboard:
-   - Vào Project Settings > Environment Variables
-   - Thêm các biến cần thiết (database URL, API keys, etc.)
+#### Deploy Ngay (Không Cần Cấu Hình)
+
+1. **In-Memory Storage**: Ứng dụng tự động sử dụng in-memory storage trên Vercel
+   - ✅ Cho phép deploy ngay
+   - ✅ Ứng dụng sẽ chạy được
+   - ⚠️ Dữ liệu sẽ mất khi server restart (hành vi bình thường của serverless)
+
+2. **File Storage**: Files được lưu trong memory và serve qua API
+   - ✅ Upload hoạt động ngay
+   - ✅ Files có thể xem được
+   - ⚠️ Files sẽ mất khi server restart
+
+3. **Xem hướng dẫn chi tiết**: `DEPLOY_INSTRUCTIONS.md`
+
+#### Cấu Hình Production (Tùy Chọn)
+
+Nếu cần lưu trữ dữ liệu lâu dài:
+
+1. **Database**: 
+   - Sử dụng Vercel KV (đơn giản nhất) - Xem `VERCEL_QUICK_FIX.md`
+   - Hoặc Vercel Postgres, Supabase, MongoDB Atlas
+
+2. **File Storage**:
+   - Sử dụng Vercel Blob Storage - Xem `VERCEL_QUICK_FIX.md`
+   - Hoặc AWS S3, Cloudinary
+
+3. **Environment Variables**: Thêm trong Vercel Dashboard nếu sử dụng database/storage service
 
 4. **Function Timeout**: OCR processing có thể mất thời gian, đảm bảo cấu hình timeout phù hợp trong `vercel.json`
 

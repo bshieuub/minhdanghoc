@@ -38,3 +38,6 @@ next-env.d.ts
 /public/uploads
 /uploads
 
+# data (local development)
+/data
+*.json
