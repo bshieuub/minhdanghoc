@@ -1,0 +1,12 @@
+# Files và thư mục không cần deploy lên Vercel
+node_modules
+.next
+.vercel
+.env*.local
+.env
+*.log
+.DS_Store
+data
+public/uploads
+pages/api
+

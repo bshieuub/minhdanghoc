@@ -40,4 +40,5 @@ next-env.d.ts
 
 # data (local development)
 /data
-*.json
+data/*.json
+# Note: package.json and package-lock.json should NOT be ignored
